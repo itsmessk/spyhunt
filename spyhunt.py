@@ -314,6 +314,9 @@ update_group.add_argument('-u', '--update', action='store_true', help='Update th
 
 parser.add_argument('--shodan-api', help='Shodan API key for subdomain enumeration')
 
+nuclei_group.add_argument('-ssrf', '--ssrf', type=str, help='File containing domains to test for SSRF vulnerabilities', metavar='domains.txt')
+
+nuclei_group.add_argument('-ssrf-url', '--ssrf-url', type=str, help='Single URL to test for SSRF vulnerabilities', metavar='http://example.com')
 
 args = parser.parse_args()
 
@@ -2512,3 +2515,64 @@ if args.autorecon:
     if __name__ == "__main__":
         target_url = args.autorecon
         asyncio.run(main(target_url))
+
+
+
+def load_ssrf_payloads():
+    payloads_file = os.path.join('payloads', 'ssrf.txt')
+    try:
+        with open(payloads_file, 'r') as f:
+            return [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        print(f"{Fore.RED}Error: Payloads file {payloads_file} not found.{Style.RESET_ALL}")
+        return []
+
+# Check SSRF for a single domain
+def check_ssrf(domain, save_file=None):
+    ssrf_payloads = load_ssrf_payloads()
+    if not ssrf_payloads:
+        print(f"{Fore.RED}No SSRF payloads loaded. Exiting.{Style.RESET_ALL}")
+        return
+
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "*/*",
+    }
+
+    results = []
+    for payload in ssrf_payloads:
+        try:
+            response = requests.get(f"{domain}?url={payload}", headers=headers, timeout=5)
+            if response.status_code == 200:
+                result = f"Potential SSRF vulnerability detected with payload: {payload}"
+                results.append(result)
+                if not save_file:
+                    print(f"{Fore.RED}{result}{Style.RESET_ALL}")
+            else:
+                if not save_file:
+                    print(f"{Fore.YELLOW}No SSRF detected with payload: {payload}{Style.RESET_ALL}")
+        except requests.RequestException as e:
+            error_message = f"Error testing SSRF on {domain} with payload {payload}: {e}"
+            results.append(error_message)
+            if not save_file:
+                print(f"{Fore.LIGHTBLACK_EX}{error_message}{Style.RESET_ALL}")
+
+    if save_file:
+        with open(save_file, 'a') as f:
+            for result in results:
+                f.write(f"{domain} - {result}\n")
+        print(f"{Fore.GREEN}Results saved to {save_file}{Style.RESET_ALL}")
+
+# Main logic
+if args.ssrf:
+    with open(args.ssrf, 'r') as f:
+        domains = [line.strip() for line in f if line.strip()]
+
+    for domain in domains:
+        print(f"{Fore.CYAN}Checking SSRF for {Fore.GREEN}{domain}{Style.RESET_ALL}")
+        check_ssrf(domain, args.save)
+
+if args.ssrf_url:
+    domain = args.ssrf_url
+    print(f"{Fore.CYAN}Checking SSRF for {Fore.GREEN}{domain}{Style.RESET_ALL}")
+    check_ssrf(domain, args.save)
